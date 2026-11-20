@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 700px;">
+        <div class="card-header bg-dark text-white p-3 border-0 rounded-top">
+            <h4 class="mb-0 fw-bold"><i class="bi bi-person-plus-fill text-info"></i> Registrar Nuevo Usuario</h4>
+        </div>
+        
+        <div class="card-body p-4 text-dark">
+            <p class="text-muted small mb-4">Complete los datos personales y credenciales de acceso al sistema.</p>
+            
+            <form action="/user/new" method="POST">
+                <!-- Fila 1: Documento y Nombre Completo -->
+                <div class="row mb-3">
+                    <div class="col-md-5">
+                        <label for="documento" class="form-label fw-semibold">Documento / Cédula <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-card-text"></i></span>
+                            <input type="text" class="form-control" id="documento" name="documento" placeholder="Ej. 1020304050" required>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <label for="nombre" class="form-label fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila 2: Correo Electrónico y Rol -->
+                <div class="row mb-3">
+                    <div class="col-md-7">
+                        <label for="email" class="form-label fw-semibold">Correo Electrónico <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="usuario@correo.com" required>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="rol" class="form-label fw-semibold">Rol en el Sistema <span class="text-danger">*</span></label>
+                        <select class="form-select" id="rol" name="rol" required>
+                            <option value="" selected disabled>Seleccione...</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Vendedor">Vendedor / Cajero</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fila 3: Contraseña -->
+                <div class="mb-4">
+                    <label for="password" class="form-label fw-semibold">Contraseña <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light text-muted"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="d-flex justify-content-end gap-2 border-top pt-3">
+                    <a href="/users" class="btn btn-outline-secondary px-4">Cancelar</a>
+                    <button type="submit" class="btn btn-info text-white px-4 fw-bold shadow-sm">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,21 +1,17 @@
+
 {% extends 'layout.html' %}
 
 {% block content %}
 <div class="container my-5">
-    <!-- Tarjeta Principal del Formulario -->
     <div class="card shadow-sm border-0 mx-auto" style="max-width: 700px;">
-        <!-- Encabezado de la Tarjeta (Color verde temático para productos/éxito) -->
         <div class="card-header bg-dark text-white p-3 border-0 rounded-top">
             <h4 class="mb-0 fw-bold"><i class="bi bi-box-seam-fill text-success"></i> Registrar Nuevo Producto</h4>
         </div>
         
-        <!-- Cuerpo del Formulario -->
         <div class="card-body p-4 text-dark">
             <p class="text-muted small mb-4">Ingrese las especificaciones, precios y existencias para añadir el artículo al inventario.</p>
             
             <form action="/product/new" method="POST">
-                
-                <!-- Fila 1: Nombre del Producto -->
                 <div class="mb-3">
                     <label for="nombre_producto" class="form-label fw-semibold">Nombre del Producto <span class="text-danger">*</span></label>
                     <div class="input-group">
@@ -24,7 +20,6 @@
                     </div>
                 </div>
 
-                <!-- Fila 2: Código de Barras / SKU y Categoría en paralelo -->
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="barcode" class="form-label fw-semibold">Código de Barras / SKU</label>
@@ -40,12 +35,10 @@
                             <option value="tecnologia">Tecnología / Electrónica</option>
                             <option value="papeleria">Papelería / Oficina</option>
                             <option value="aseo">Aseo / Cafetería</option>
-                            <!-- Flask cargará esto dinámicamente más adelante -->
                         </select>
                     </div>
                 </div>
 
-                <!-- Fila 3: Precio de Venta y Stock Inicial en paralelo -->
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label for="precio" class="form-label fw-semibold">Precio de Venta (COP) <span class="text-danger">*</span></label>
@@ -63,14 +56,14 @@
                     </div>
                 </div>
 
-                <!-- Botones de Acción -->
                 <div class="d-flex justify-content-end gap-2 border-top pt-3">
-                    <a href="/" class="btn btn-outline-secondary px-4">Cancelar</a>
+                    <a href="/products" class="btn btn-outline-secondary px-4">Cancelar</a>
                     <button type="submit" class="btn btn-success px-4 fw-bold shadow-sm">Guardar Producto</button>
                 </div>
-
             </form>
         </div>
     </div>
 </div>
 {% endblock %}
+
+    

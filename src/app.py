@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, url_for
 from src import create_app
 
+
+
 # 1. Primero se inicializa la aplicación
 app = create_app()
 

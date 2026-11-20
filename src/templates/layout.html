@@ -6,9 +6,10 @@
     <title>Quiclky - Panel de Control</title>
     
     <!-- Enlace de respaldo por si conecta a internet -->
+    
     <link href="https://jsdelivr.net" rel="stylesheet">
     <link rel="stylesheet" href="https://jsdelivr.net">
-    
+
     <!-- ESTILOS DIRECTOS: ESTO FUERZA AL NAVEGADOR A PONERLO HORIZONTAL SIEMPRE -->
     <style>
         body {
@@ -80,13 +81,41 @@
     <header class="navbar">
         <div style="display: flex; align-items: center;">
             <a class="navbar-brand" href="/">Quickly</a>
-            
-            <ul class="navbar-nav">
-                <li><a class="nav-link" href="/">Inicio</a></li>
-                <li><a class="dropdown-item text-info fw-bold" href="/client/new" style="color: #0dcaf0;"><i class="bi bi-person-plus"></i> Nuevo Cliente</a></li>
-                <li><a class="dropdown-item" href="/product/new" style="color: #0dcaf0;"><i class="bi bi-box-seam"></i> Nuevo Producto</a></li>
-                <li><a class="dropdown-item fw-bold" href="/user/new" style="color: #0dcaf0;" !important; background-color: transparent !important;"><i class="bi bi-person-gear"></i> Nuevo Usuario</a></li>
-                <li><a class="dropdown-item fw-bold" href="/category/new" style="color: #0dcaf0 !important; background-color: transparent !important;"><i class="bi bi-bookmark-plus"></i> Nueva Categoría</a></li>
+
+            <ul class="navbar-nav d-flex flex-row flex-wrap align-items-center gap-2">
+    <li class="nav-item">
+        <a class="btn btn-sm fw-bold" href="/" style="background-color: #ffc107; color: #0a58ca; border: 1px solid #ffc107;">
+            <i class="bi bi-house-door-fill"></i> Inicio
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-sm fw-bold" href="/products" style="background-color: #ffc107; color: #0a58ca; border: 1px solid #ffc107;">
+            <i class="bi bi-boxes"></i> Productos
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-sm fw-bold" href="/client/new" style="background-color: #ffc107; color: #0a58ca; border: 1px solid #ffc107;">
+            <i class="bi bi-person-plus"></i> Nuevo Cliente
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-sm fw-bold" href="/product/new" style="background-color: #ffc107; color: #0a58ca; border: 1px solid #ffc107;">
+            <i class="bi bi-box-seam"></i> Nuevo Producto
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-sm fw-bold" href="/user/new" style="background-color: #ffc107; color: #0a58ca; border: 1px solid #ffc107;">
+            <i class="bi bi-person-gear"></i> Nuevo Usuario
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-sm fw-bold" href="/category/new" style="background-color: #ffc107; color: #0a58ca; border: 1px solid #ffc107;">
+            <i class="bi bi-bookmark-plus"></i> Nueva Categoría
+        </a>
+    </li>
+</ul>
+
+
 
             </ul>
         </div>
