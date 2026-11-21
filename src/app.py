@@ -13,9 +13,9 @@ def new_client():
         nombre = request.form.get('nombre')
         id_type = request.form.get('idType')
         id_number = request.form.get('idNumber')
-        phone = request.form.get('phone')
+        telefono = request.form.get('telefono')
         email = request.form.get('email')
-        adress = request.form.get('adress')
+        direccion = request.form.get('direccion')
         
         print(f"Registrando cliente: {nombre} - {id_type}: {id_number}")
         return redirect(url_for('index')) # O 'home' según tu ruta principal

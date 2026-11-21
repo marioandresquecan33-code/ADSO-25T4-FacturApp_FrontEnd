@@ -33,5 +33,15 @@ def nuevo_producto():
 
     return render_template('productos/form_products.html')
 
+# Eliminar producto llamando al DELETE del Backend
+@producto_bp.route('/product/delete/<int:id>')
+def eliminar_producto(id):
+    try:
+        requests.delete(f"{API_URL}/productos/{id}")
+    except Exception:
+        pass
+    return redirect(url_for('producto_bp.listar_productos'))
+
+
 
 

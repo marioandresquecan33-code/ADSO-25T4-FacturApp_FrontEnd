@@ -30,3 +30,13 @@ def nuevo_usuario():
         return redirect(url_for('usuario_bp.listar_usuarios'))
 
     return render_template('usuarios/form_users.html')
+
+# Eliminar usuario llamando al DELETE del Backend
+@usuario_bp.route('/user/delete/<int:id>')
+def eliminar_usuario(id):
+    try:
+        requests.delete(f"{API_URL}/usuarios/{id}")
+    except Exception:
+        pass
+    return redirect(url_for('usuario_bp.listar_usuarios'))
+
