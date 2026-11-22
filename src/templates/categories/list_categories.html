@@ -1,28 +1,45 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
 
 {% block content %}
+<div class="container my-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white p-3 border-0 rounded-top d-flex justify-content-between align-items-center">
+            <h4 class="mb-0 fw-bold"><i class="bi bi-tags text-warning"></i> Listado de Categorías</h4>
+            <a href="/category/new" class="btn btn-warning text-dark fw-bold btn-sm">
+                <i class="bi bi-plus-circle"></i> Nueva Categoría
+            </a>
+        </div>
 
-  <h1>List Categories</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Category</th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <tr>
-        <th scope="row">1</th>
-        <td>Alimentos</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Ropa</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Calzado</td>
-      </tr>
-    </tbody>
-  </table>
-  {% endblock %}
+        <div class="card-body p-4 text-dark">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre de Categoría</th>
+                            <th>Descripción</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cat in categorias %}
+                        <tr>
+                            <td>{{ cat.id_categoria }}</td>
+                            <td class="fw-semibold">{{ cat.nombre }}</td>
+                            <td>{{ cat.descripcion or 'Sin descripción' }}</td>
+                            <td class="text-center">
+                                <a href="/category/delete/{{ cat.id_categoria }}" class="btn btn-danger btn-sm">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">No hay categorías registradas todavía.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
