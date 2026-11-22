@@ -47,9 +47,10 @@
                         </div>
                     </div>
                     <h2 class="card-title fw-bold mb-1">{{ totales.facturas }}</h2>
-                    <a href="#" class="text-decoration-none small text-success icon-link icon-link-hover">
-                        Historial <i class="bi bi-arrow-right"></i>
-                    </a>
+                      <a href="/facturas" class="text-decoration-none small text-success icon-link icon-link-hover">
+                           Historial <i class="bi bi-arrow-right"></i>
+                      </a>
+
                 </div>
             </div>
         </div>
@@ -92,14 +93,16 @@
     </div>
 
     <!-- SECCIÓN INTERMEDIA: ACCIONES DE ACCESO DIRECTO -->
-    <div class="bg-light p-4 rounded-3 shadow-sm border mb-5">
-        <h4 class="fw-bold mb-3 text-dark">Acciones Rápidas</h4>
-        <div class="d-flex flex-wrap gap-3">
-            <a href="/client/new" class="btn btn-outline-primary"><i class="bi bi-person-plus"></i> Registrar Cliente</a>
-            <a href="/product/new" class="btn btn-outline-success"><i class="bi bi-plus-square"></i> Cargar Producto</a>
-            <a href="/category/new" class="btn btn-outline-warning"><i class="bi bi-tags"></i> Crear Categoría</a>
-        </div>
+<div class="bg-light p-4 rounded-3 shadow-sm border mb-5">
+    <h4 class="fw-bold mb-3 text-dark">Acciones Rápidas</h4>
+    <div class="d-flex flex-wrap gap-3">
+        <a href="/client/new" class="btn btn-outline-primary"><i class="bi bi-person-plus"></i> Registrar Cliente</a>
+        <a href="/product/new" class="btn btn-outline-success"><i class="bi bi-plus-square"></i> Cargar Producto</a>
+        <a href="/category/new" class="btn btn-outline-warning"><i class="bi bi-tags"></i> Crear Categoría</a>
+        <a href="/factura/new" class="btn btn-success fw-bold"><i class="bi bi-cart-plus"></i> Emitir Factura</a>
     </div>
+</div>
+
 
 </div>
 {% endblock %}
