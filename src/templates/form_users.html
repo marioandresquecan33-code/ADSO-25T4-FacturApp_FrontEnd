@@ -10,62 +10,61 @@
         <div class="card-body p-4 text-dark">
             <p class="text-muted small mb-4">Cree las credenciales de acceso y asigne los permisos necesarios para el nuevo colaborador del sistema.</p>
             
-            <form action="/user/new" method="POST">
-                
-                <!-- Fila 1: Nombre Completo -->
-                <div class="mb-3">
-                    <label for="nombre" class="form-label fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-light text-muted"><i class="bi bi-person"></i></span>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Carlos Arturo Mendoza" required>
-                    </div>
-                </div>
+<form action="{{ '/user/edit/' ~ usuario.id_usuario if usuario else '/user/new' }}" method="POST">
+    <div class="mb-3">
+        <label for="nombre" class="form-label fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
+        <div class="input-group">
+            <span class="input-group-text bg-light text-muted"><i class="bi bi-person"></i></span>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ usuario.nombre if usuario else '' }}" placeholder="Ej. Carlos Arturo Mendoza" required>
+        </div>
+    </div>
 
-                <!-- Fila 2: Documento y Correo Electrónico en paralelo -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="documento" class="form-label fw-semibold">Número de Documento <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="bi bi-card-text"></i></span>
-                            <input type="text" class="form-control" id="documento" name="documento" placeholder="Ej. 1020304050" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label fw-semibold">Correo Electrónico <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="carlos@quickly.com" required>
-                        </div>
-                    </div>
-                </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="documento" class="form-label fw-semibold">Número de Documento <span class="text-danger">*</span></label>
+            <div class="input-group">
+                <span class="input-group-text bg-light text-muted"><i class="bi bi-card-text"></i></span>
+                <input type="text" class="form-control" id="documento" name="documento" value="{{ usuario.documento if usuario else '' }}" placeholder="Ej. 1020304050" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label fw-semibold">Correo Electrónico <span class="text-danger">*</span></label>
+            <div class="input-group">
+                <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
+                <input type="email" class="form-control" id="email" name="email" value="{{ usuario.email if usuario else '' }}" placeholder="carlos@quickly.com" required>
+            </div>
+        </div>
+    </div>
 
-                <!-- Fila 3: Contraseña y Rol en paralelo -->
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <label for="password" class="form-label fw-semibold">Contraseña <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="bi bi-shield-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Mínimo 8 caracteres" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="rol" class="form-label fw-semibold">Rol del Sistema <span class="text-danger">*</span></label>
-                        <select class="form-select" id="rol" name="rol" required>
-                            <option value="" selected disabled>Seleccione un rol...</option>
-                            <option value="Administrador">Administrador / Director IT</option>
-                            <option value="Analista">Analista de Facturación</option>
-                            <option value="Vendedor">Cajero / Vendedor</option>
-                        </select>
-                    </div>
-                </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label for="password" class="form-label fw-semibold">
+                Contraseña {{ '(dejar en blanco para no cambiar)' if usuario else '*' }}
+            </label>
+            <div class="input-group">
+                <span class="input-group-text bg-light text-muted"><i class="bi bi-shield-lock"></i></span>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Mínimo 8 caracteres" {{ '' if usuario else 'required' }}>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="rol" class="form-label fw-semibold">Rol del Sistema <span class="text-danger">*</span></label>
+            <select class="form-select" id="rol" name="rol" required>
+                <option value="" disabled {{ 'selected' if not usuario else '' }}>Seleccione un rol...</option>
+                <option value="Administrador" {{ 'selected' if usuario and usuario.rol == 'Administrador' else '' }}>Administrador / Director IT</option>
+                <option value="Analista" {{ 'selected' if usuario and usuario.rol == 'Analista' else '' }}>Analista de Facturación</option>
+                <option value="Vendedor" {{ 'selected' if usuario and usuario.rol == 'Vendedor' else '' }}>Cajero / Vendedor</option>
+            </select>
+        </div>
+    </div>
 
-                <!-- Botones de Acción -->
-                <div class="d-flex justify-content-end gap-2 border-top pt-3">
-                    <a href="/users" class="btn btn-outline-secondary px-4">Cancelar</a>
-                    <button type="submit" class="btn btn-info text-dark px-4 fw-bold shadow-sm">Crear Usuario</button>
-                </div>
+    <div class="d-flex justify-content-end gap-2 border-top pt-3">
+        <a href="/users" class="btn btn-outline-secondary px-4">Cancelar</a>
+        <button type="submit" class="btn btn-info text-dark px-4 fw-bold shadow-sm">
+            {{ 'Actualizar Usuario' if usuario else 'Crear Usuario' }}
+        </button>
+    </div>
+</form>
 
-            </form>
         </div>
     </div>
 </div>

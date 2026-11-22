@@ -6,6 +6,9 @@ from src import create_app
 # 1. Primero se inicializa la aplicación
 app = create_app()
 
+if __name__ == '__main__':
+    app.run(debug=True, port=5005)
+
 # 2. SEGUNDO colocas la ruta del formulario DEBAJO de 'app = create_app()'
 @app.route('/client/new', methods=['GET', 'POST'])
 def new_client():

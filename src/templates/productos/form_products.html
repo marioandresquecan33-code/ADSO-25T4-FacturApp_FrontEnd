@@ -10,59 +10,55 @@
         <div class="card-body p-4 text-dark">
             <p class="text-muted small mb-4">Ingrese las especificaciones, precios y existencias para añadir el artículo al inventario.</p>
             
-            <form action="/product/new" method="POST">
-                <div class="mb-3">
-                    <label for="nombre_producto" class="form-label fw-semibold">Nombre del Producto <span class="text-danger">*</span></label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-light text-muted"><i class="bi bi-tag"></i></span>
-                        <input type="text" class="form-control" id="nombre_producto" name="nombre_producto" placeholder="Ej. Papel Impresión Resma A4" required>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="barcode" class="form-label fw-semibold">Código de Barras / SKU</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="bi bi-barcode"></i></span>
-                            <input type="text" class="form-control" id="barcode" name="barcode" placeholder="Ej. 770123456789">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="id_categoria" class="form-label fw-semibold">Categoría <span class="text-danger">*</span></label>
-                        <select class="form-select" id="id_categoria" name="id_categoria" required>
-                            <option value="" disabled selected>Seleccione una categoría...</option>
-                            {% for cat in categorias %}
-                                <option value="{{ cat.id_categoria }}">{{ cat.nombre }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <label for="precio" class="form-label fw-semibold">Precio de Venta (COP) <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="bi bi-currency-dollar"></i></span>
-                            <input type="number" step="0.01" class="form-control" id="precio" name="precio" placeholder="Ej. 15000" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="stock" class="form-label fw-semibold">Stock / Cantidad Inicial <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light text-muted"><i class="bi bi-hash"></i></span>
-                            <input type="number" class="form-control" id="stock" name="stock" placeholder="Ej. 50" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-end gap-2 border-top pt-3">
-                    <a href="/products" class="btn btn-outline-secondary px-4">Cancelar</a>
-                    <button type="submit" class="btn btn-success px-4 fw-bold shadow-sm">Guardar Producto</button>
-                </div>
-            </form>
+            <form action="{{ '/product/edit/' ~ producto.id_producto if producto else '/product/new' }}" method="POST">
+    <div class="mb-3">
+        <label for="nombre_producto" class="form-label fw-semibold">Nombre del Producto <span class="text-danger">*</span></label>
+        <div class="input-group">
+            <span class="input-group-text bg-light text-muted"><i class="bi bi-tag"></i></span>
+            <input type="text" class="form-control" id="nombre_producto" name="nombre_producto" value="{{ producto.nombre_producto if producto else '' }}" placeholder="Ej. Papel Impresión Resma A4" required>
         </div>
     </div>
-</div>
-{% endblock %}
 
-    
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="barcode" class="form-label fw-semibold">Código de Barras / SKU</label>
+            <div class="input-group">
+                <span class="input-group-text bg-light text-muted"><i class="bi bi-barcode"></i></span>
+                <input type="text" class="form-control" id="barcode" name="barcode" value="{{ producto.barcode if producto else '' }}" placeholder="Ej. 770123456789">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="id_categoria" class="form-label fw-semibold">Categoría <span class="text-danger">*</span></label>
+            <select class="form-select" id="id_categoria" name="id_categoria" required>
+                <option value="" disabled {{ 'selected' if not producto else '' }}>Seleccione una categoría...</option>
+                {% for cat in categorias %}
+                    <option value="{{ cat.id_categoria }}" {{ 'selected' if producto and producto.id_categoria == cat.id_categoria else '' }}>{{ cat.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label for="precio" class="form-label fw-semibold">Precio de Venta (COP) <span class="text-danger">*</span></label>
+            <div class="input-group">
+                <span class="input-group-text bg-light text-muted"><i class="bi bi-currency-dollar"></i></span>
+                <input type="number" step="0.01" class="form-control" id="precio" name="precio" value="{{ producto.precio if producto else '' }}" placeholder="Ej. 15000" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="stock" class="form-label fw-semibold">Stock / Cantidad Inicial <span class="text-danger">*</span></label>
+            <div class="input-group">
+                <span class="input-group-text bg-light text-muted"><i class="bi bi-hash"></i></span>
+                <input type="number" class="form-control" id="stock" name="stock" value="{{ producto.stock if producto else '' }}" placeholder="Ej. 50" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 border-top pt-3">
+        <a href="/products" class="btn btn-outline-secondary px-4">Cancelar</a>
+        <button type="submit" class="btn btn-success px-4 fw-bold shadow-sm">
+            {{ 'Actualizar Producto' if producto else 'Guardar Producto' }}
+        </button>
+    </div>
+</form>

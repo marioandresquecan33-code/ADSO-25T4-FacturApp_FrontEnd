@@ -1,7 +1,6 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<!-- Contenedor Principal con animación de entrada opcional -->
 <div class="container my-5">
     
     <!-- Fila de Bienvenida -->
@@ -11,14 +10,13 @@
             <p class="lead text-muted">Bienvenido al sistema de administración y facturación electrónica de Quickly.</p>
         </div>
         <div class="col-md-4 text-md-end">
-            <!-- Fecha Dinámica o Estado -->
             <span class="badge bg-primary-subtle text-primary p-2 fs-6 border border-primary-subtle rounded-pill">
                 <i class="bi bi-calendar3"></i> Período Activo: Noviembre 2026
             </span>
         </div>
     </div>
 
-    <!-- FILA DE TARJETAS DE ESTADÍSTICAS (Cards de acceso rápido) -->
+    <!-- FILA DE TARJETAS DE ESTADÍSTICAS (Con datos reales desde MySQL) -->
     <div class="row g-4 mb-5">
         <!-- Tarjeta Clientes -->
         <div class="col-12 col-sm-6 col-lg-3">
@@ -30,8 +28,8 @@
                             <i class="bi bi-people-fill"></i>
                         </div>
                     </div>
-                    <h2 class="card-title fw-bold mb-1">1,248</h2>
-                    <a href="/client/list" class="text-decoration-none small icon-link icon-link-hover">
+                    <h2 class="card-title fw-bold mb-1">{{ totales.clientes }}</h2>
+                    <a href="/list_clients" class="text-decoration-none small icon-link icon-link-hover">
                         Ver listado <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
@@ -48,7 +46,7 @@
                             <i class="bi bi-receipt"></i>
                         </div>
                     </div>
-                    <h2 class="card-title fw-bold mb-1">320</h2>
+                    <h2 class="card-title fw-bold mb-1">{{ totales.facturas }}</h2>
                     <a href="#" class="text-decoration-none small text-success icon-link icon-link-hover">
                         Historial <i class="bi bi-arrow-right"></i>
                     </a>
@@ -66,8 +64,8 @@
                             <i class="bi bi-box-seam"></i>
                         </div>
                     </div>
-                    <h2 class="card-title fw-bold mb-1">84</h2>
-                    <a href="/product/list" class="text-decoration-none small text-warning icon-link icon-link-hover">
+                    <h2 class="card-title fw-bold mb-1">{{ totales.productos }}</h2>
+                    <a href="/products" class="text-decoration-none small text-warning icon-link icon-link-hover">
                         Ver inventario <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
@@ -84,8 +82,8 @@
                             <i class="bi bi-shield-lock"></i>
                         </div>
                     </div>
-                    <h2 class="card-title fw-bold mb-1">5</h2>
-                    <a href="/user/list" class="text-decoration-none small text-info icon-link icon-link-hover">
+                    <h2 class="card-title fw-bold mb-1">{{ totales.usuarios }}</h2>
+                    <a href="/users" class="text-decoration-none small text-info icon-link icon-link-hover">
                         Gestionar <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
@@ -105,4 +103,3 @@
 
 </div>
 {% endblock %}
-

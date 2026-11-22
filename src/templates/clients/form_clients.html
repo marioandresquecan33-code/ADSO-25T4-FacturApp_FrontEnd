@@ -1,48 +1,71 @@
-
 {% extends 'layout.html' %}
 
 {% block content %}
-<h1>New Client</h1>
-      <form>
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
-          <div id="nameHelp" class="form-text">Write your full name.</div>
+<div class="container my-5">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 700px;">
+        <div class="card-header bg-dark text-white p-3 border-0 rounded-top">
+            <h4 class="mb-0 fw-bold">
+                <i class="bi bi-person-plus-fill text-primary"></i> 
+                {{ 'Editar Cliente' if cliente else 'Registrar Nuevo Cliente' }}
+            </h4>
         </div>
-        <div class="mb-3">
-          <label for="idType" class="form-label">Identification Number</label>
-          <select class="form-select" aria-label="idTypeHelp">
-            <option selected>Select your identification type</option>
-            <option value="CC">CC</option>
-            <option value="TI">TI</option>
-            <option value="CE">CE</option>
-            <option value="PA">PAS</option>
-          </select>
-          <div id="idTypeHelp" class="form-text">Write your identification number.</div>
+        
+        <div class="card-body p-4 text-dark">
+            <p class="text-muted small mb-4">Complete la información de identificación y contacto del cliente para facturación.</p>
+            
+            <form action="{{ '/client/edit/' ~ cliente.id_cliente if cliente else '/client/new' }}" method="POST">
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="documento" class="form-label fw-semibold">NIT / Cédula <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-card-text"></i></span>
+                            <input type="text" class="form-control" id="documento" name="documento" value="{{ cliente.documento if cliente else '' }}" placeholder="Ej. 1020304050" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label fw-semibold">Nombre o Razón Social <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ cliente.nombre if cliente else '' }}" placeholder="Ej. Carlos Gómez" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="email" class="form-label fw-semibold">Correo Electrónico</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ cliente.email if cliente else '' }}" placeholder="cliente@correo.com">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label fw-semibold">Teléfono / Celular</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted"><i class="bi bi-telephone"></i></span>
+                            <input type="text" class="form-control" id="telefono" name="telefono" value="{{ cliente.telefono if cliente else '' }}" placeholder="Ej. 3001234567">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="direccion" class="form-label fw-semibold">Dirección de Residencia / Entrega</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light text-muted"><i class="bi bi-geo-alt"></i></span>
+                        <input type="text" class="form-control" id="direccion" name="direccion" value="{{ cliente.direccion if cliente else '' }}" placeholder="Ej. Calle 10 # 20-30, Bogotá">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 border-top pt-3">
+                    <a href="/list_clients" class="btn btn-outline-secondary px-4">Cancelar</a>
+                    <button type="submit" class="btn btn-primary px-4 fw-bold shadow-sm">
+                        {{ 'Actualizar Cliente' if cliente else 'Guardar Cliente' }}
+                    </button>
+                </div>
+
+            </form>
         </div>
-        <div class="mb-3">
-          <label for="idNumber" class="form-label">Identification Number</label>
-          <input type="text" class="form-control" id="adress" aria-describedby="idNumberHelp" placeholder="11122333">
-          <div id="idNumberHelp" class="form-text">Write your identification number.</div>
-        </div>
-        <div class="mb-3">
-          <label for="adress" class="form-label">Adress</label>
-          <input type="text" class="form-control" id="adress" aria-describedby="emailHelp" placeholder="Cra 20 # 55 -66">
-          <div id="adressHelp" class="form-text">Write your home adress.</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-          <label for="phone" class="form-label">Phone</label>
-          <input type="text" class="form-control" id="phone">
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="recibirEmail">
-          <label class="form-check-label" for="exampleCheck1">Do you want be contacted by e-mail?</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+    </div>
+</div>
 {% endblock %}
