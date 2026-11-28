@@ -2,7 +2,7 @@ import requests
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 
 factura_bp = Blueprint('factura_bp', __name__)
-API_URL = "http://127.0.0"
+API_URL = "http://localhost:5002/api"
 
 # Historial de facturas emitidas desde MySQL
 @factura_bp.route('/facturas')

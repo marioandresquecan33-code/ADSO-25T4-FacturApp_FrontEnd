@@ -2,7 +2,7 @@ import requests
 from flask import Blueprint, render_template
 
 home_bp = Blueprint('home', __name__)
-API_URL = "http://127.0.0.1:5002/api"
+API_URL = "http://localhost:5002/api"
 
 @home_bp.route('/')
 def home():

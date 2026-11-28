@@ -2,7 +2,7 @@ import requests
 from flask import Blueprint, render_template, request, redirect, url_for
 
 categories_bp = Blueprint('categories', __name__)
-API_URL = "http://127.0.0.1:5002/api"
+API_URL = "http://localhost:5002/api"
 
 # Listar categorías reales desde MySQL
 @categories_bp.route('/list_categories')

@@ -2,7 +2,7 @@ import requests
 from flask import Blueprint, render_template, request, redirect, url_for
 
 usuario_bp = Blueprint('usuario_bp', __name__)
-API_URL = "http://127.0.0.1:5002/api"
+API_URL = "http://localhost:5002/api"
 
 # Listar usuarios reales desde MySQL
 @usuario_bp.route('/users')
