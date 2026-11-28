@@ -6,25 +6,30 @@
         <div class="card-header bg-dark text-white p-3 border-0 rounded-top">
             <h4 class="mb-0 fw-bold">
                 <i class="bi bi-person-plus-fill text-primary"></i> 
-                {{ 'Editar Cliente' if cliente else 'Registrar Nuevo Cliente' }}
+                {{ 'Editar Cliente' if cliente and cliente.id_cliente else 'Registrar Nuevo Cliente' }}
             </h4>
         </div>
         
         <div class="card-body p-4 text-dark">
-            <p class="text-muted small mb-4">Complete la información de identificación y contacto del cliente para facturación.</p>
+            <p class="text-muted small mb-4">Complete los datos del cliente para registrarlo en el sistema de facturación.</p>
+
+            {% if error %}
+            <div class="alert alert-danger fw-semibold shadow-sm" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i> {{ error }}
+            </div>
+            {% endif %}
             
-            <form action="{{ '/client/edit/' ~ cliente.id_cliente if cliente else '/client/new' }}" method="POST">
-                
+            <form action="{{ '/client/edit/' ~ cliente.id_cliente if cliente and cliente.id_cliente else '/client/new' }}" method="POST">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="documento" class="form-label fw-semibold">NIT / Cédula <span class="text-danger">*</span></label>
+                        <label for="documento" class="form-label fw-semibold">Documento / Cédula / NIT <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text bg-light text-muted"><i class="bi bi-card-text"></i></span>
                             <input type="text" class="form-control" id="documento" name="documento" value="{{ cliente.documento if cliente else '' }}" placeholder="Ej. 1020304050" required>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="nombre" class="form-label fw-semibold">Nombre o Razón Social <span class="text-danger">*</span></label>
+                        <label for="nombre" class="form-label fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text bg-light text-muted"><i class="bi bi-person"></i></span>
                             <input type="text" class="form-control" id="nombre" name="nombre" value="{{ cliente.nombre if cliente else '' }}" placeholder="Ej. Carlos Gómez" required>
@@ -37,7 +42,7 @@
                         <label for="email" class="form-label fw-semibold">Correo Electrónico</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ cliente.email if cliente else '' }}" placeholder="cliente@correo.com">
+                            <input type="email" class="form-control" id="email" name="email" value="{{ cliente.email if cliente else '' }}" placeholder="Ej. carlos@correo.com">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -50,7 +55,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="direccion" class="form-label fw-semibold">Dirección de Residencia / Entrega</label>
+                    <label for="direccion" class="form-label fw-semibold">Dirección</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light text-muted"><i class="bi bi-geo-alt"></i></span>
                         <input type="text" class="form-control" id="direccion" name="direccion" value="{{ cliente.direccion if cliente else '' }}" placeholder="Ej. Calle 10 # 20-30, Bogotá">
@@ -60,10 +65,9 @@
                 <div class="d-flex justify-content-end gap-2 border-top pt-3">
                     <a href="/list_clients" class="btn btn-outline-secondary px-4">Cancelar</a>
                     <button type="submit" class="btn btn-primary px-4 fw-bold shadow-sm">
-                        {{ 'Actualizar Cliente' if cliente else 'Guardar Cliente' }}
+                        {{ 'Actualizar Cliente' if cliente and cliente.id_cliente else 'Guardar Cliente' }}
                     </button>
                 </div>
-
             </form>
         </div>
     </div>
